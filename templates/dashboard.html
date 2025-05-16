@@ -1,0 +1,90 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h1 class="card-title">OWASP Top 10 (2021) Dashboard</h1>
+                <p class="card-text">
+                    The OWASP Top 10 is a standard awareness document for developers and web application security. 
+                    It represents a broad consensus about the most critical security risks to web applications.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-6">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h5 class="card-title">Risk Distribution</h5>
+                <canvas id="riskChart" height="250"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h5 class="card-title">Prevalence Comparison</h5>
+                <canvas id="prevalenceChart" height="250"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">OWASP Top 10 Vulnerabilities</h5>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Category</th>
+                                <th>Risk Level</th>
+                                <th>Prevalence</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for vuln in vulnerabilities %}
+                            <tr>
+                                <td>{{ vuln.id }}</td>
+                                <td>{{ vuln.name }}</td>
+                                <td>
+                                    <span class="badge rounded-pill 
+                                        {% if vuln.risk_level == 'Critical' %}bg-danger
+                                        {% elif vuln.risk_level == 'High' %}bg-warning text-dark
+                                        {% elif vuln.risk_level == 'Medium' %}bg-info text-dark
+                                        {% else %}bg-success
+                                        {% endif %}">
+                                        {{ vuln.risk_level }}
+                                    </span>
+                                </td>
+                                <td>{{ vuln.prevalence }}%</td>
+                                <td>
+                                    <a href="{{ url_for('vulnerability_detail', vuln_id=vuln.id) }}" class="btn btn-sm btn-primary">Details</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Pass vulnerability data to the JavaScript file
+    const vulnerabilities = {{ vulnerabilities|tojson }};
+</script>
+{% endblock %}
+

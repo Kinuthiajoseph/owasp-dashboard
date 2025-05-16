@@ -1,0 +1,222 @@
+
+{
+  "owasp_top_10": [
+    {
+      "id": "A01:2021",
+      "name": "Broken Access Control",
+      "description": "Access control enforces policy such that users cannot act outside of their intended permissions. Failures typically lead to unauthorized information disclosure, modification, or destruction of data.",
+      "examples": [
+        "Bypassing access control checks by modifying the URL or HTML page",
+        "Allowing the primary key to be changed to another user's record",
+        "Elevation of privilege by acting as a user without being logged in"
+      ],
+      "mitigation": [
+        "Implement proper access controls with a consistent model",
+        "Deny by default, then grant specific permissions to roles",
+        "Disable directory listing and ensure metadata files are not present in web roots",
+        "Log access control failures and alert administrators",
+        "Rate limit API access to minimize automated attack damage"
+      ],
+      "risk_level": "Critical",
+      "prevalence": 94,
+      "cwe_references": [
+        "CWE-22", "CWE-23", "CWE-35", "CWE-59", "CWE-200", "CWE-201", "CWE-352"
+      ]
+    },
+    {
+      "id": "A02:2021",
+      "name": "Cryptographic Failures",
+      "description": "Failures related to cryptography which often lead to sensitive data exposure or system compromise. Previously known as 'Sensitive Data Exposure'.",
+      "examples": [
+        "Transmitting sensitive data in clear text",
+        "Using old or weak cryptographic algorithms",
+        "Using default or weak keys, or not properly managing keys"
+      ],
+      "mitigation": [
+        "Classify data processed, stored, or transmitted by an application",
+        "Apply controls as per the classification",
+        "Don't store sensitive data unnecessarily",
+        "Ensure up-to-date and strong algorithms, protocols, and keys",
+        "Encrypt all sensitive data at rest",
+        "Disable caching for responses containing sensitive data"
+      ],
+      "risk_level": "Critical",
+      "prevalence": 83,
+      "cwe_references": [
+        "CWE-261", "CWE-296", "CWE-310", "CWE-319", "CWE-321", "CWE-322", "CWE-323"
+      ]
+    },
+    {
+      "id": "A03:2021",
+      "name": "Injection",
+      "description": "Injection flaws, such as SQL, NoSQL, OS, and LDAP injection, occur when untrusted data is sent to an interpreter as part of a command or query.",
+      "examples": [
+        "SQL injection attacks where user-supplied data is not validated",
+        "XPath injection in XML queries",
+        "Command injection in OS operations"
+      ],
+      "mitigation": [
+        "Use a safe API which avoids interpreter use entirely",
+        "Use positive server-side input validation",
+        "Escape special characters using the specific escape syntax for the target interpreter",
+        "Use LIMIT or other SQL controls within queries to prevent mass disclosure"
+      ],
+      "risk_level": "High",
+      "prevalence": 77,
+      "cwe_references": [
+        "CWE-20", "CWE-74", "CWE-75", "CWE-77", "CWE-78", "CWE-79", "CWE-89"
+      ]
+    },
+    {
+      "id": "A04:2021",
+      "name": "Insecure Design",
+      "description": "Insecure design refers to failures in the design phase of software development, rather than implementation flaws.",
+      "examples": [
+        "Applications that allow users to bypass authentication or authorization checks",
+        "Systems without proper defenses against automated attacks",
+        "Applications with architectural security flaws"
+      ],
+      "mitigation": [
+        "Establish secure design patterns and threat modeling",
+        "Use integration of security into the software development lifecycle",
+        "Write unit and integration tests to validate security controls",
+        "Segment application architecture into tiers with clear separation"
+      ],
+      "risk_level": "High",
+      "prevalence": 67,
+      "cwe_references": [
+        "CWE-209", "CWE-256", "CWE-501", "CWE-522", "CWE-732"
+      ]
+    },
+    {
+      "id": "A05:2021",
+      "name": "Security Misconfiguration",
+      "description": "Security misconfiguration is the most commonly seen issue, often the result of insecure default configurations, incomplete configurations, open cloud storage, or verbose error messages.",
+      "examples": [
+        "Unnecessary features are enabled or installed",
+        "Default accounts and their passwords still enabled and unchanged",
+        "Error handling reveals stack traces to users"
+      ],
+      "mitigation": [
+        "Secure installation processes including a minimal platform",
+        "Remove or disable unnecessary features, components, documentation",
+        "Review cloud storage permissions",
+        "Segment application architecture",
+        "Send security directives to clients"
+      ],
+      "risk_level": "Medium",
+      "prevalence": 90,
+      "cwe_references": [
+        "CWE-2", "CWE-11", "CWE-13", "CWE-15", "CWE-16", "CWE-260", "CWE-520"
+      ]
+    },
+    {
+      "id": "A06:2021",
+      "name": "Vulnerable and Outdated Components",
+      "description": "Components, such as libraries, frameworks, and other software modules, run with the same privileges as the application. If a vulnerable component is exploited, such an attack can facilitate serious data loss or server takeover.",
+      "examples": [
+        "Libraries and frameworks with known vulnerabilities",
+        "Outdated software components and dependencies",
+        "Failure to scan for vulnerabilities regularly"
+      ],
+      "mitigation": [
+        "Remove unused dependencies and unnecessary features",
+        "Continuously inventory versions of client-side and server-side components",
+        "Only obtain components from official sources",
+        "Monitor for libraries and components that are unmaintained",
+        "Use software composition analysis tools to automate the process"
+      ],
+      "risk_level": "Medium",
+      "prevalence": 85,
+      "cwe_references": [
+        "CWE-937", "CWE-1035", "CWE-1104"
+      ]
+    },
+    {
+      "id": "A07:2021",
+      "name": "Identification and Authentication Failures",
+      "description": "Authentication-related attacks compromise user identity, authentication, and session management.",
+      "examples": [
+        "Credential stuffing (using lists of known passwords)",
+        "Brute force attacks",
+        "Permitting weak or well-known passwords"
+      ],
+      "mitigation": [
+        "Implement multi-factor authentication",
+        "Do not ship or deploy with default credentials",
+        "Implement weak-password checks",
+        "Align password length, complexity, and rotation policies with NIST guidelines",
+        "Limit or increasingly delay failed login attempts"
+      ],
+      "risk_level": "Medium",
+      "prevalence": 63,
+      "cwe_references": [
+        "CWE-255", "CWE-259", "CWE-287", "CWE-288", "CWE-290", "CWE-294", "CWE-295"
+      ]
+    },
+    {
+      "id": "A08:2021",
+      "name": "Software and Data Integrity Failures",
+      "description": "Software and data integrity failures relate to code and infrastructure that does not protect against integrity violations.",
+      "examples": [
+        "Using plugins, libraries from untrusted sources or CDNs",
+        "Auto-update functionality without sufficient integrity verification",
+        "Unsigned or unencrypted serialized data passed to untrusted clients"
+      ],
+      "mitigation": [
+        "Use digital signatures to verify software or data is from expected source",
+        "Ensure dependencies are from trusted repositories",
+        "Ensure CI/CD pipeline has proper segregation, configuration, and access control",
+        "Verify that unsigned serialized data is not sent to untrusted clients"
+      ],
+      "risk_level": "Medium",
+      "prevalence": 61,
+      "cwe_references": [
+        "CWE-345", "CWE-353", "CWE-426", "CWE-494", "CWE-502", "CWE-565", "CWE-784"
+      ]
+    },
+    {
+      "id": "A09:2021",
+      "name": "Security Logging and Monitoring Failures",
+      "description": "This category is to help detect, escalate, and respond to active breaches. Without logging and monitoring, breaches cannot be detected.",
+      "examples": [
+        "Auditable events not logged",
+        "Warnings and errors generate unclear or no log messages",
+        "Logs not monitored for suspicious activity"
+      ],
+      "mitigation": [
+        "Establish effective monitoring and alerting",
+        "Ensure logs are generated in a format easily consumed by centralized solutions",
+        "Ensure high-value transactions have an audit trail",
+        "Establish or adopt an incident response and recovery plan"
+      ],
+      "risk_level": "Low",
+      "prevalence": 56,
+      "cwe_references": [
+        "CWE-117", "CWE-223", "CWE-532", "CWE-778"
+      ]
+    },
+    {
+      "id": "A10:2021",
+      "name": "Server-Side Request Forgery (SSRF)",
+      "description": "SSRF flaws occur whenever a web application is fetching a remote resource without validating the user-supplied URL.",
+      "examples": [
+        "Applications that fetch URLs from untrusted sources",
+        "Fetching remote resources without validation",
+        "Accessing internal services through public-facing applications"
+      ],
+      "mitigation": [
+        "Sanitize and validate all client-supplied input data",
+        "Enforce URL schema, port, and destination with a positive allow list",
+        "Do not send raw responses to clients",
+        "Disable HTTP redirections",
+        "Be aware of the URL consistency to avoid attacks such as DNS rebinding"
+      ],
+      "risk_level": "Low",
+      "prevalence": 46,
+      "cwe_references": [
+        "CWE-918"
+      ]
+    }
+  ]
+}
